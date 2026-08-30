@@ -12,7 +12,7 @@ type Lesson = {
 const lessons: Lesson[] = [
   { n:1, title:"AprilTag là gì?", goal:"Nhận biết ID, tâm và bốn góc của AprilTag.", steps:["Đưa tag vào khung hình","Xoay tag 30°","Che 50% tag","Ghi nhận khi camera mất tag"], result:"Khung xanh xuất hiện khi nhận diện thành công.", product:"Bảng quan sát 4 thử nghiệm", easy:"AprilTag giống một cột mốc có số riêng. Camera dùng viền, bốn góc và mẫu ở giữa để biết tag nào đang xuất hiện, nằm lệch bên nào và xa hay gần.", teacherPrep:"In AprilTag ID 0–3, dán lên bìa cứng; chuẩn bị máy chiếu. Bài này chưa cần JetBot thật.", realRobot:"Trên JetBot thật, camera cần thấy trọn tag, đủ sáng và không bị rung để đọc ID ổn định.", commonError:"Nhầm AprilTag với QR code hoặc chưa hình dung z_m.", fix:"Nhắc lại: QR ưu tiên chứa nội dung; AprilTag ưu tiên định vị. z_m là khoảng cách tiến thẳng từ camera đến tag." },
   { n:2, title:"Mở camera JetBot", goal:"Biết camera là mắt của robot và mở đúng quy trình.", steps:["Kiểm tra JetBot đã bật","Kiểm tra cùng Wi‑Fi","Mở JupyterLab","Shut Down All Kernels","Bật camera"], result:"Video có nhãn LIVE màu xanh và ổn định.", product:"Ảnh camera live và IP JetBot", easy:"Một camera chỉ nên được một notebook dùng tại một thời điểm. Tắt kernel cũ trước khi mở camera giúp tránh tình trạng camera bị chiếm.", teacherPrep:"Reboot JetBot, ghi sẵn IP từng xe và mở thử notebook camera trước khi học sinh vào lớp.", realRobot:"Kết thúc bài thật bằng cleanup: ngắt liên kết video nếu có và chạy camera.stop().", commonError:"Device busy, không có hình hoặc camera khởi tạo thất bại.", fix:"Shut Down All Kernels → chạy lại từ cell đầu → kiểm tra IP, Wi‑Fi và dây CSI → reboot nếu vẫn chưa được." },
-  { n:3, title:"Hiệu chỉnh camera", goal:"Tạo kết quả calibration tin cậy từ ảnh checkerboard.", steps:["Đặt bảng ở giữa","Chụp các mép ảnh","Chụp gần và xa","Chụp nghiêng","Đủ 10 ảnh khác nhau"], result:"RMS dưới 1,0 px là tốt.", product:"camera_calibration.json và bảng góc chụp", easy:"Ống kính làm méo ảnh ở rìa. Chụp checkerboard ở nhiều vị trí giúp tạo một “thước đo” riêng cho camera.", teacherPrep:"Chuẩn bị checkerboard 11 × 8 ô, dán phẳng. Trong code phải dùng số góc trong (10, 7).", realRobot:"Mỗi camera cần file calibration riêng; không lấy file của JetBot khác dùng thay.", commonError:"Không thấy checkerboard, RMS cao hoặc đếm nhầm số ô.", fix:"Làm phẳng bảng, tăng sáng và chụp lại 10–15 góc thật khác nhau: giữa, mép, nghiêng, gần, xa." },
+  { n:3, title:"Hiệu chỉnh camera", goal:"Tạo kết quả calibration tin cậy từ ảnh checkerboard.", steps:["Đặt bảng ở giữa","Chụp các mép ảnh","Chụp gần và xa","Chụp nghiêng","Đủ 10 ảnh khác nhau"], result:"RMS dưới 1,0 px là tốt.", product:"camera_calibration.json và bảng góc chụp", easy:"Ống kính làm méo ảnh ở rìa. Chụp checkerboard ở nhiều vị trí giúp tạo một 'thước đo' riêng cho camera.", teacherPrep:"Chuẩn bị checkerboard 11 × 8 ô, dán phẳng. Trong code phải dùng số góc trong (10, 7).", realRobot:"Mỗi camera cần file calibration riêng; không lấy file của JetBot khác dùng thay.", commonError:"Không thấy checkerboard, RMS cao hoặc đếm nhầm số ô.", fix:"Làm phẳng bảng, tăng sáng và chụp lại 10–15 góc thật khác nhau: giữa, mép, nghiêng, gần, xa." },
   { n:4, title:"Kiểm tra calibration", goal:"So sánh ảnh trước và sau khi khử méo.", steps:["Kéo thanh so sánh","Quan sát rìa ảnh","Chọn nhận xét đúng","Kiểm tra RMS","Quyết định dùng kết quả"], result:"Các đường thẳng ở rìa bớt cong.", product:"Ảnh verify_undistorted.jpg và ghi chú", easy:"Ảnh giữa thường thay đổi ít; cạnh bàn, tường và lưới ở rìa cho thấy rõ calibration có sửa méo tốt hay không.", teacherPrep:"Kiểm tra camera_calibration.json của từng nhóm và chuẩn bị checkerboard dự phòng.", realRobot:"Nếu RMS trên 2,0 px hoặc đường rìa vẫn cong nhiều, quay lại Bài 3 trước khi đo tag.", commonError:"Không có JSON, verify không chạy hoặc RMS quá cao.", fix:"Mở đúng thư mục notebook → giải phóng camera → chạy verify từ đầu; nếu RMS cao thì chụp lại bộ calibration." },
   { n:5, title:"Nhận diện AprilTag", goal:"Đọc khoảng cách z_m và đánh giá chất lượng nhận diện.", steps:["Đo ở 40 cm","Đo ở 60 cm","Đo ở 80 cm","Thử TAG_SIZE sai"], result:"Bảng đo có sai số cho từng khoảng cách.", product:"Bảng đo 40/60/80 cm và ảnh bounding box", easy:"ID là số hiệu; x_m là lệch trái-phải; z_m là khoảng cách. Hamming càng thấp và Margin càng cao thì kết quả thường càng đáng tin.", teacherPrep:"Chuẩn bị tag36h11, thước đo, ánh sáng ổn định và notebook Perception đã kiểm thử.", realRobot:"TAG_SIZE phải là cạnh thật của tag tính bằng mét. 15 cm phải nhập 0.15.", commonError:"Không detect, z_m sai hoặc ID thay đổi liên tục.", fix:"Kiểm tra family/ID, ánh sáng và tag nằm trọn khung. Đo lại TAG_SIZE và dùng đúng file calibration của JetBot." },
   { n:6, title:"Điều hướng đến một tag", goal:"Cho robot tìm ID 1 và dừng cách tag 0,30 m.", steps:["Kiểm tra an toàn","Bắt đầu quét","Tìm thấy ID 1","Căn giữa và tiến tới","Ghi kết quả 3 lần"], result:"Robot dừng trong vùng 0,30 m ± sai số.", product:"Ba lần đo khoảng cách dừng", easy:"Robot làm hai việc: scan để xoay tìm đúng ID, rồi approach để căn theo x_m và tiến đến khi z_m đạt khoảng cách dừng.", teacherPrep:"Dọn vùng 1,5 m × 1,5 m, dựng chắc tag ID 1, mở sẵn lệnh robot.stop() và luôn có người quan sát.", realRobot:"Chỉ chạy notebook Navigation gốc đã kiểm thử; lần đầu dùng tốc độ thấp và không để người đứng trước đường chạy.", commonError:"Robot không chạy, scan timeout hoặc vượt quá tag.", fix:"Dừng robot trước. Kiểm tra motor/ID/ánh sáng; nếu vượt đích, giảm tốc và kiểm tra TAG_SIZE cùng calibration." },
@@ -22,17 +22,17 @@ const lessons: Lesson[] = [
 const icons = ["◈","◉","▦","↔","⌖","➜","⇢"];
 
 export default function Home() {
-  const [started,setStarted] = useState(false);
-  const [lesson,setLesson] = useState(0);
-  const [step,setStep] = useState(0);
-  const [teacher,setTeacher] = useState(false);
-  const [showHandbook,setShowHandbook] = useState(false);
-  const [camera,setCamera] = useState(false);
-  const [calibration,setCalibration] = useState(false);
-  const [running,setRunning] = useState(false);
-  const [distance,setDistance] = useState(1.1);
-  const [runs,setRuns] = useState(0);
-  const [notice,setNotice] = useState("");
+  const [started, setStarted] = useState(false);
+  const [lesson, setLesson] = useState(0);
+  const [step, setStep] = useState(0);
+  const [teacher, setTeacher] = useState(false);
+  const [showHandbook, setShowHandbook] = useState(false);
+  const [camera, setCamera] = useState(false);
+  const [calibration, setCalibration] = useState(false);
+  const [running, setRunning] = useState(false);
+  const [distance, setDistance] = useState(1.1);
+  const [runs, setRuns] = useState(0);
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     const saved = localStorage.getItem("jetbot-progress");
